@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Photo Renamer</title>
+	<meta name="description" content="Rename photos by the date they were taken, like 2026-10-12_Goa_001.jpg. Free, works in your browser, and your photos never leave your device.">
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237A00E6'/%3E%3Cpath d='M8 11h4l2-3h4l2 3h4v12H8z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='17' r='3.5' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<main class="page">
+		<header class="hero">
+			<p class="eyebrow">Free · Private · No sign-up</p>
+			<h1>Photo Renamer</h1>
+			<p class="lead">Turn <code>IMG_4521.HEIC</code> into <code>2026-10-12_Goa_001.heic</code>. Photos are renamed by the date they were taken, so they sort in order everywhere.</p>
+			<p class="privacy">Everything happens in your browser. Your photos are never uploaded.</p>
+		</header>
+
+		<section class="card" aria-labelledby="step-choose">
+			<h2 id="step-choose"><span class="step">1</span> Choose your photos</h2>
+			<div class="pickers">
+				<button type="button" class="button primary" id="pick-folder">Choose a folder</button>
+				<label class="button secondary" for="pick-files">
+					Choose photos
+					<input type="file" id="pick-files" multiple accept="image/*,.heic,.heif,.dng,.cr2,.cr3,.nef,.arw,.orf,.rw2,.raf" hidden>
+				</label>
+				<input type="file" id="pick-folder-fallback" webkitdirectory multiple hidden>
+			</div>
+			<p class="hint" id="mode-hint"></p>
+		</section>
+
+		<section class="card" aria-labelledby="step-name">
+			<h2 id="step-name"><span class="step">2</span> Choose how to name them</h2>
+			<div class="fields">
+				<label class="field">
+					<span>Event or place <small>(optional)</small></span>
+					<input type="text" id="event" placeholder="e.g. Goa Trip" autocomplete="off">
+				</label>
+				<label class="field">
+					<span>Name pattern</span>
+					<input type="text" id="pattern" placeholder="{date}_{n}" autocomplete="off" spellcheck="false">
+				</label>
+				<label class="field narrow">
+					<span>Start at</span>
+					<input type="number" id="start" value="1" min="0" inputmode="numeric">
+				</label>
+			</div>
+			<div class="chips" role="group" aria-label="Add a placeholder to the pattern">
+				<button type="button" class="chip" data-token="{date}">{date} <small>2026-10-12</small></button>
+				<button type="button" class="chip" data-token="{time}">{time} <small>093000</small></button>
+				<button type="button" class="chip" data-token="{event}">{event}</button>
+				<button type="button" class="chip" data-token="{n}">{n} <small>001</small></button>
+				<button type="button" class="chip" data-token="{year}">{year}</button>
+				<button type="button" class="chip" data-token="{month}">{month}</button>
+				<button type="button" class="chip" data-token="{day}">{day}</button>
+				<button type="button" class="chip" data-token="{name}">{name} <small>original</small></button>
+			</div>
+			<label class="check">
+				<input type="checkbox" id="use-file-date" checked>
+				Use the file's date for photos without a date taken (screenshots, downloads)
+			</label>
+			<p class="error" id="pattern-error" role="alert" hidden></p>
+		</section>
+
+		<section class="card" aria-labelledby="step-preview">
+			<h2 id="step-preview"><span class="step">3</span> Check and rename</h2>
+			<p class="status" id="status" role="status" aria-live="polite">Choose a folder or some photos to see a preview.</p>
+			<div class="table-wrap" id="preview-wrap" hidden>
+				<table>
+					<thead>
+						<tr><th scope="col">Now</th><th scope="col">Will be</th><th scope="col">Date</th></tr>
+					</thead>
+					<tbody id="preview"></tbody>
+				</table>
+			</div>
+			<div class="actions">
+				<button type="button" class="button primary" id="rename" hidden>Rename photos</button>
+				<button type="button" class="button primary" id="download" hidden>Download renamed copies (ZIP)</button>
+				<button type="button" class="button secondary" id="undo" hidden>Undo</button>
+			</div>
+		</section>
+
+		<footer class="footer">
+			<p>Also available as a command-line tool for thousands of photos at once. <a href="https://github.com/bhavanaditya/photo-renamer">Source code on GitHub</a> · Made by <a href="https://www.bhavanaditya.com/">Bhavanaditya D R</a></p>
+		</footer>
+	</main>
+
+	<script type="module" src="app.js"></script>
+</body>
+</html>
