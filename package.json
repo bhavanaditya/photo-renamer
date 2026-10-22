@@ -1,0 +1,36 @@
+{
+  "name": "photo-renamer",
+  "version": "1.0.0",
+  "description": "Rename photos by the date they were taken, from the command line or in the browser.",
+  "type": "module",
+  "bin": {
+    "photo-renamer": "bin/photo-renamer.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "scripts": {
+    "test": "node --test tests/core.test.js tests/cli.test.js"
+  },
+  "engines": {
+    "node": ">=18.18"
+  },
+  "keywords": [
+    "photos",
+    "rename",
+    "exif",
+    "cli",
+    "heic"
+  ],
+  "author": "Bhavanaditya D R (https://www.bhavanaditya.com/)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhavanaditya/photo-renamer.git"
+  },
+  "homepage": "https://bhavanaditya.github.io/photo-renamer/",
+  "dependencies": {
+    "exifr": "7.1.3"
+  }
+}
